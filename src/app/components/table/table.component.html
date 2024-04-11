@@ -1,12 +1,22 @@
 <table>
+  <tbody>
   <tr >
     <th *ngFor="let j of tableHead">{{j}}</th>
   </tr>
-  <tr *ngFor="let i of tableValues">
-    <td>{{i.name}}</td>
-    <td>{{i.phoneNumber}}</td>
-    <td>{{i.address}}</td>
-  </tr>
+  
+    <tr *ngFor="let i of tableValues">
+      <td *ngIf ="i.name">{{i.name}}</td>
+      <td *ngIf ="i.phoneNumber">{{i.phoneNumber}}</td>
+      <td *ngIf ="i.address">{{i.address}}</td>
+      <td  *ngIf ="i.useWhatsapp">
+        <mat-checkbox class="example-margin" checked>Yes!</mat-checkbox>
+      </td>
+      <td  *ngIf ="i.useWhatsapp===false">
+        <mat-checkbox class="example-margin" >No</mat-checkbox>
+      </td>
+    </tr>
+  </tbody>
+ 
  
 </table>
 

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
+import {ThemePalette} from '@angular/material/core';
+import {FormsModule} from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common'
 import { arrayBuffer } from 'stream/consumers';
 
@@ -17,27 +19,31 @@ import { arrayBuffer } from 'stream/consumers';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, MatCheckboxModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
 export class TableComponent {
-  tableHead=[
-    "Name", "Phone Number", "Address"
-  ];
-  tableValues = [
+  @Input() tableHead: Array<any> = [];
+  @Input() tableValues: Array<any> = [];
+  // tableHead=[
+  //   "Name", "Phone Number", "Address", "Use whatsapp"
+  // ];
+  // tableValues = [
   
-    {
-      name: "Arun",
-      phoneNumber: "7022355615",
-      address:"Some Address"
-    },
-    {
-      name: "Akhil",
-      phoneNumber: "8022355615",
-      address:"Some Address"
-    }
+  //   {
+  //     name: "Arun",
+  //     phoneNumber: "7022355615",
+  //     address:"Some Address",
+  //     useWhatsapp:true
+  //   },
+  //   {
+  //     name: "Akhil",
+  //     phoneNumber: "8022355615",
+  //     address:"Some Address",
+  //     useWhatsapp:false
+  //   }
     
-    ];
+  //   ];
     
 }
