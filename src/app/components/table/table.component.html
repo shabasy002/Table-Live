@@ -4,22 +4,20 @@
     <th *ngFor="let j of tableHead">{{j}}</th>
   </tr>
   
-    <tr *ngFor="let i of tableValues">
-      <td *ngIf ="i.name">{{i.name}}</td>
-      <td *ngIf ="i.phoneNumber">{{i.phoneNumber}}</td>
-      <td *ngIf ="i.address">{{i.address}}</td>
-      <td  *ngIf ="i.useWhatsapp">
-        <mat-checkbox class="example-margin" checked disabled>Yes!</mat-checkbox>
+    <tr *ngFor="let item of tableValues ">
+      <td  *ngFor="let i of item | keyvalue: keepOrder">
+        
+        <p *ngIf ="i.value!==true && i.value!==false" >{{i.value}}</p>
+        <mat-checkbox *ngIf ="i.value===true" class="example-margin" checked disabled>Yes!</mat-checkbox>
+        <mat-checkbox *ngIf ="i.value===false" class="example-margin" disabled>No</mat-checkbox>
+
       </td>
-      <td  *ngIf ="i.useWhatsapp===false">
-        <mat-checkbox class="example-margin" disabled>No</mat-checkbox>
-      </td>
+      
+ 
     </tr>
   </tbody>
  
  
 </table>
 
-<!-- <ul >
-  <li *ngFor="let i of tableValues">{{i.name}}</li>
-</ul> -->
+
