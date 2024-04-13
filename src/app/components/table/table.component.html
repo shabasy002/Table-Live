@@ -8,8 +8,11 @@
       <td  *ngFor="let i of item | keyvalue: keepOrder">
         
         <p *ngIf ="i.value!==true && i.value!==false" >{{i.value}}</p>
-        <mat-checkbox *ngIf ="i.value===true" class="example-margin" checked disabled>Yes!</mat-checkbox>
-        <mat-checkbox *ngIf ="i.value===false" class="example-margin" disabled>No</mat-checkbox>
+        
+        
+        <mat-checkbox *ngIf ="i.value===true || i.value===false" [(ngModel)]="i.value" disabled class="example-margin"  [checked]="true"   >{{i.value}}</mat-checkbox>
+        
+        <!-- <mat-checkbox *ngIf ="i.value===false" class="example-margin" disabled>No</mat-checkbox> -->
 
       </td>
       
