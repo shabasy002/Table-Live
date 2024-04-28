@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
+import { ElectionTableComponent } from '../../components/election-table/election-table.component';
 
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableComponent, ElectionTableComponent],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss'
 })

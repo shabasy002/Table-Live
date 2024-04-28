@@ -1,6 +1,6 @@
 <table>
   <tbody>
-  <tr >
+  <tr>
     <th *ngFor="let j of tableHead">{{j}}</th>
   </tr>
   
@@ -10,7 +10,7 @@
         <p *ngIf ="i.value!==true && i.value!==false" >{{i.value}}</p>
         
         
-        <mat-checkbox *ngIf ="i.value===true || i.value===false" [(ngModel)]="i.value" disabled class="example-margin"  [checked]="true"   >{{i.value}}</mat-checkbox>
+        <mat-checkbox *ngIf ="i.value===true || i.value===false" [(ngModel)]="i.value" disabled class="example-margin"  [checked]="true"   >{{i.value? 'Yes' : 'No'}}</mat-checkbox>
         
         <!-- <mat-checkbox *ngIf ="i.value===false" class="example-margin" disabled>No</mat-checkbox> -->
 

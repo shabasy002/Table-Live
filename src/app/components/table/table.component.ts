@@ -5,17 +5,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common'
 import { arrayBuffer } from 'stream/consumers';
 
- export interface UserTable {
-   name: string;
-   phone: number;
-   Address:string;
- }
- const ELEMENT_DATA: UserTable[] = [
-   { name: 'Hydrogen', phone: 1.0079, Address: 'Trivandrum'},
-   { name: 'Oxygen', phone: 2.0079, Address: 'Kollam'}
 
- 
- ];
 @Component({
   selector: 'app-table',
   standalone: true,
