@@ -15,7 +15,8 @@ export interface VotersList {
 
 const ELEMENT_DATA: VotersList[] = [
 	{ name: 'Arjun', age: 32, phone: 8792424, isWhatsappUser: true, constituency: 'Thiruvanthapuram', isEligibleToVote: true}, 
-	{ name: 'Ravi', age: 37, phone: 9898764, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true}
+	{ name: 'Ravi', age: 37, phone: 9898764, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true},
+  { name: 'Akhil', age: 35, phone: 9998764, isWhatsappUser: true, constituency: 'Kocchi', isEligibleToVote: true}
 ];
 function myFunction(){
   
@@ -52,7 +53,11 @@ export class ElectionTableComponent implements OnInit {
   ];
   dataSource = ELEMENT_DATA;
   displayedColumns: Array<string> = [];
-
+  property:number = 0;
+  
+   increment_property(): void{
+    this.property++;
+  }
   ngOnInit(): void {
     let val:string="name";
    

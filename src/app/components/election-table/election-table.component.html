@@ -31,9 +31,11 @@
       </tr>
 
       </ng-container>
-     <tr  *ngFor="let i of dataSource">
-      <ng-container *ngFor="let k of columnConfigurations">
-        <td >{{k.cell}}</td>
+     <tr  *ngFor="let i of dataSource;let x= index;">
+      <ng-container *ngFor="let k of columnConfigurations ">
+        <td >{{k.cell[x]}}</td>
+
+        
       </ng-container>
        
      </tr>
