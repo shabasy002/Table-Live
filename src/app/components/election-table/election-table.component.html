@@ -10,7 +10,15 @@
       </ng-container>
      <tr  *ngFor="let i of ELEMENT_DATA;let x= index;">
       <ng-container *ngFor="let k of columnConfigurations ">
-        <td >{{k.cell[x]}}</td>
+        <td >
+          <div *ngIf ="k.displayStyle!='boolean' && k.displayStyle!='booleanIcon'">
+            {{k.cell[x]}}
+          </div>
+          <mat-icon *ngIf ="k.displayStyle=='boolean'">{{k.cell[x]? "done" : "dangerous_black"}}</mat-icon>
+
+          <!-- <mat-checkbox *ngIf ="k.displayStyle=='boolean' && k.cell[x]===true" [(ngModel)]="k.displayStyle" disabled class="example-margin"  [checked]="true"   >{{k.cell[x]? "Yes" : "No"}}</mat-checkbox> -->
+
+        </td>
 
         
       </ng-container>
