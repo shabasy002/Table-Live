@@ -1,33 +1,16 @@
 import { CommonModule } from '@angular/common';
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, input} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
+import {ColumnConfiguration} from '../../model/column-configutation'
+import {VotersList} from '../../model/voters-list'
 
-export interface VotersList {
-  name: string;
-  age: number;
-  phone: number;
-  isWhatsappUser: boolean;
-  constituency:string;
-  isEligibleToVote:boolean;
-}
 
-const ELEMENT_DATA: VotersList[] = [
-	{ name: 'Arjun', age: 32, phone: 8792424, isWhatsappUser: true, constituency: 'Thiruvanthapuram', isEligibleToVote: true}, 
-	{ name: 'Ravi', age: 37, phone: 9898764, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true},
-  { name: 'Akhil', age: 35, phone: 9998764, isWhatsappUser: true, constituency: 'Kocchi', isEligibleToVote: true}
-];
-function myFunction(){
-  
-}
 
-interface ColumnConfiguration {
-	columnDef: string;
-	title: string;
-  cell:any;
-	//displayStyle: DisplayStyle
-}
+
+
+
 
 @Component({
   selector: 'app-election-table',
@@ -36,22 +19,11 @@ interface ColumnConfiguration {
   templateUrl: './election-table.component.html',
   styleUrl: './election-table.component.scss'
 })
+
 export class ElectionTableComponent implements OnInit {
-  columnConfigurations: Array<ColumnConfiguration> = [ 
-    { columnDef: 'name', title: 'Name of Citizen', cell:ELEMENT_DATA.map(function (user) {
-      return user.name;     
-  })}, 
-     { columnDef: 'isEligibleToVote', title: 'Is Eligible To Vote', cell:ELEMENT_DATA.map(function (user) {
-      return user.isEligibleToVote;  
-  })},
-     { columnDef: 'age', title: 'Age', cell:ELEMENT_DATA.map(function (user) {
-      return user.age;  
-  })}, 
-     { columnDef: 'phone', title: 'Phone', cell:ELEMENT_DATA.map(function (user) {
-      return user.phone;  
-  })}
-  ];
-  dataSource = ELEMENT_DATA;
+  @Input() columnConfigurations: Array<any> = [];
+  @Input() ELEMENT_DATA: Array<any> = [];
+  //dataSource = this.ELEMENT_DATA;
   displayedColumns: Array<string> = [];
   property:number = 0;
   
@@ -61,7 +33,7 @@ export class ElectionTableComponent implements OnInit {
   ngOnInit(): void {
     let val:string="name";
    
-    let newArr:Array<VotersList>=ELEMENT_DATA;
+    //let newArr:Array<VotersList>=ELEMENT_DATA;
     
 
     //console.log( newArr);

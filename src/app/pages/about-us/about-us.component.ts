@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
 import { ElectionTableComponent } from '../../components/election-table/election-table.component';
+import { ColumnConfiguration } from '../../model/column-configutation';
+import { VotersList } from '../../model/voters-list';
 
 @Component({
   selector: 'app-about-us',
@@ -10,35 +12,24 @@ import { ElectionTableComponent } from '../../components/election-table/election
   styleUrl: './about-us.component.scss'
 })
 export class AboutUsComponent {
- 
-  tableHead=[
-    "Name", "Phone Number", "Network Name", "Address", "Use whatsapp"
+   ELEMENT_DATA: VotersList[] = [
+    { name: 'Arjun', age: 32, phone: 8792424, isWhatsappUser: true, constituency: 'Thiruvanthapuram', isEligibleToVote: true}, 
+    { name: 'Ravi', age: 37, phone: 9898764, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true},
+    { name: 'Akhil', age: 35, phone: 9998764, isWhatsappUser: true, constituency: 'Kocchi', isEligibleToVote: true}
   ];
-  tableValues = [
- 
-   {
-     name: "Nikhil",
-     phoneNumber: "9022355615",
-     networkName: "Jio",
-     address:"Some Address",
-     useWhatsapp:false
-   },
-   {
-     name: "Varun",
-     phoneNumber: "6022355615",
-     networkName: "ACT",
-     address:"Some Address",
+  columnConfigurations: Array<ColumnConfiguration> = [ 
+    { columnDef: 'name', title: 'Name of Citizen', cell:this.ELEMENT_DATA.map(function (user) {
+      return user.name;     
+  })}, 
      
-     useWhatsapp:false
-   },
-   {
-    name: "Charan",
-    phoneNumber: "6022355615",
-    networkName: "Airtel",
-    address:"Some Address",
-    
-    useWhatsapp:true
-  },
-   
-   ];
+     { columnDef: 'age', title: 'Age', cell:this.ELEMENT_DATA.map(function (user) {
+      return user.age;  
+  })}, 
+  { columnDef: 'isEligibleToVote', title: 'Is Eligible To Vote', cell:this.ELEMENT_DATA.map(function (user) {
+    return user.isEligibleToVote;  
+})},
+     { columnDef: 'phone', title: 'Phone', cell:this.ELEMENT_DATA.map(function (user) {
+      return user.phone;  
+  })}
+  ];
 }
