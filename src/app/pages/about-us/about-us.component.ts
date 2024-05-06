@@ -21,13 +21,16 @@ export class AboutUsComponent {
     { name: 'Nkhil', age: 16, phone: 9998713, isWhatsappUser: false, constituency: 'Kottayam', isEligibleToVote: false}
   ];
   columnConfigurations: Array<ColumnConfiguration> = [ 
-    { columnDef: 'name', title: 'Name of Citizen', displayStyle: DisplayStyle.string, cell:this.ELEMENT_DATA.map(function (user) {
+    { columnDef: 'name', title: 'Name of Citizen', displayStyle: DisplayStyle.string,   cell:this.ELEMENT_DATA.map(function (user) {
       return user.name;     
   })}, 
      
      { columnDef: 'age', title: 'Age', displayStyle: DisplayStyle.number, cell:this.ELEMENT_DATA.map(function (user) {
       return user.age;  
   })}, 
+  { columnDef: 'constituency', title: 'Constituency', hide:true, displayStyle: DisplayStyle.string, cell:this.ELEMENT_DATA.map(function (user) {
+    return user.constituency;  
+})},
   { columnDef: 'isEligibleToVote', displayStyle: DisplayStyle.boolean,  title: 'Is Eligible To Vote', cell:this.ELEMENT_DATA.map(function (user) {
     return user.isEligibleToVote;  
 })},

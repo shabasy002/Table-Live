@@ -2,6 +2,7 @@ export interface ColumnConfiguration {
 	columnDef: string;
 	title: string;
     cell:any;
+    hide?: boolean;
 	displayStyle: DisplayStyle
 }
 

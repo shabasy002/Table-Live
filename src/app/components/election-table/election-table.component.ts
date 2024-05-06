@@ -9,11 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import {ColumnConfiguration} from '../../model/column-configutation'
 import {VotersList} from '../../model/voters-list'
 import { DisplayStyle } from '../../model/column-configutation';
-
-
-
-
-
 @Component({
   selector: 'app-election-table',
   standalone: true,

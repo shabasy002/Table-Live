@@ -1,20 +1,17 @@
-
-
-   <table>
+<table>
     <tbody>
       <ng-container >
         <tr >
           <th *ngFor="let j of columnConfigurations">{{j.title}}</th>
       </tr>
-
       </ng-container>
      <tr  *ngFor="let i of ELEMENT_DATA;let x= index;">
       <ng-container *ngFor="let k of columnConfigurations ">
         <td >
-          <div *ngIf ="k.displayStyle!='boolean' && k.displayStyle!='booleanIcon'">
+          <div *ngIf ="k.displayStyle!='boolean' && k.displayStyle!='booleanIcon' && k.hide!==true">
             {{k.cell[x]}}
           </div>
-          <mat-icon *ngIf ="k.displayStyle=='boolean'">{{k.cell[x]? "check_circle_black" : "dangerous_black"}}</mat-icon>
+          <mat-icon *ngIf ="k.displayStyle=='boolean' && k.hide!==true">{{k.cell[x]? "check_circle_black" : "dangerous_black"}}</mat-icon>
 
           <!-- <mat-checkbox *ngIf ="k.displayStyle=='boolean' && k.cell[x]===true" [(ngModel)]="k.displayStyle" disabled class="example-margin"  [checked]="true"   >{{k.cell[x]? "Yes" : "No"}}</mat-checkbox> -->
 
