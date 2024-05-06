@@ -5,4 +5,6 @@ export interface VotersList {
 	isWhatsappUser: boolean;
 	constituency:string;
 	isEligibleToVote:boolean;
+	rationCardType?:string;
   }
+

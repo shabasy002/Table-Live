@@ -3,6 +3,7 @@ export interface ColumnConfiguration {
 	title: string;
     cell:any;
     hide?: boolean;
+    sortable?: boolean;
 	displayStyle: DisplayStyle
 }
 
@@ -12,4 +13,10 @@ export enum DisplayStyle {
 	boolean = 'boolean',
 	booleanIcon = 'booleanIcon',
 	rationCardType = 'rationCardType'
+}
+
+export enum RationCardType {
+	White = 'white',
+	Green = 'green',
+	Blue = 'blue'
 }
