@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
 import { ElectionTableComponent } from '../../components/election-table/election-table.component';
 import { ColumnConfiguration } from '../../model/column-configutation';
 import { VotersList } from '../../model/voters-list';
 import { DisplayStyle } from '../../model/column-configutation';
 import { RationCardType } from '../../model/column-configutation';
+import { Observable, from, of } from 'rxjs';
 
+import { Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-about-us',
   standalone: true,
@@ -14,15 +16,19 @@ import { RationCardType } from '../../model/column-configutation';
   styleUrl: './about-us.component.scss'
 })
 
-export class AboutUsComponent {
-  
-  protected ELEMENT_DATA: VotersList[] = [
+export class AboutUsComponent  {
+   
+  @Output() dataSource: Array<any> = [];
+   ELEMENT_DATA: VotersList[] = [
     { name: 'Arjun', age: 32, phone: 8792424, isWhatsappUser: true, constituency: 'Thiruvanthapuram', isEligibleToVote: true, rationCardType: RationCardType.White}, 
     { name: 'Ravi', age: 37, phone: 9898764, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true, rationCardType: RationCardType.Blue},
     { name: 'Akhil', age: 35, phone: 9998764, isWhatsappUser: true, constituency: 'Kocchi', isEligibleToVote: true},
     { name: 'Nkhil', age: 16, phone: 9998713, isWhatsappUser: false, constituency: 'Kottayam', isEligibleToVote: false}
   ];
-  protected columnConfigurations: Array<ColumnConfiguration> = [ 
+  @Output() arraySource: Array<any> = [];
+   
+
+   columnConfigurations: Array<ColumnConfiguration> = [ 
     { columnDef: 'name', title: 'Name of Citizen',  displayStyle: DisplayStyle.string,   cell:this.ELEMENT_DATA.map(function (user) {
       return user.name;     
   })}, 
@@ -43,4 +49,13 @@ export class AboutUsComponent {
       return user.phone;  
   })}
   ];
+  @Input()
+  newArr: VotersList[] = [];
+  ngOnChanges() {
+    // create header using child_id
+    //console.log(this.dataSource);
+  }
+  constructor() {
+    console.log(this.arraySource) ;           
+  }
 }

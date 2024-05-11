@@ -1,11 +1,19 @@
-<table>
+<table matSort (matSortChange)="sortData($event)">
     <tbody>
       <ng-container >
         <tr >
-          <th *ngFor="let j of columnConfigurations">{{j.title}}</th>
+          <th *ngFor="let j of columnConfigurations" mat-sort-header="{{j.columnDef}}">{{j.title}}</th>
       </tr>
       </ng-container>
-     <tr  *ngFor="let i of ELEMENT_DATA;let x= index;">
+      @for (ELEMENT_DATA of sortedData; track ELEMENT_DATA;let  i = $index) {
+        <ng-container >
+          <tr >         
+            <td *ngFor="let k of columnConfigurations;let x= index; "> {{ELEMENT_DATA[k.columnDef]}}</td>
+          </tr>
+        </ng-container>
+       
+      }
+     <!-- <tr  *ngFor="let i of ELEMENT_DATA;let x= index;"> 
       <ng-container *ngFor="let k of columnConfigurations ">
         <td>
           
@@ -20,7 +28,7 @@
         
       </ng-container>
        
-     </tr>
+     </tr> -->
 
   
   
