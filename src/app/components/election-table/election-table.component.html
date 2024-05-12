@@ -1,4 +1,4 @@
-<table matSort (matSortChange)="sortData($event)">
+<table matSort (matSortChange)="sortData($event)"  matSortDirection="asc" matSortDisableClear>
     <tbody>
       <ng-container >
         <tr >
@@ -8,27 +8,18 @@
       @for (ELEMENT_DATA of sortedData; track ELEMENT_DATA;let  i = $index) {
         <ng-container >
           <tr >         
-            <td *ngFor="let k of columnConfigurations;let x= index; "> {{ELEMENT_DATA[k.columnDef]}}</td>
+            <td *ngFor="let k of columnConfigurations;let x= index; "> 
+              <div *ngIf ="k.displayStyle!='boolean' && k.displayStyle!='booleanIcon' && k.hide!==true">
+                {{ELEMENT_DATA[k.columnDef]}}
+              </div>
+              <mat-icon *ngIf ="k.displayStyle=='boolean' && k.hide!==true">{{ELEMENT_DATA[k.columnDef]? "check_circle_black" : "dangerous_black"}}</mat-icon>
+
+            </td>
           </tr>
         </ng-container>
        
       }
-     <!-- <tr  *ngFor="let i of ELEMENT_DATA;let x= index;"> 
-      <ng-container *ngFor="let k of columnConfigurations ">
-        <td>
-          
-          <div *ngIf ="k.displayStyle!='boolean' && k.displayStyle!='booleanIcon' && k.hide!==true">
-            {{k.cell[x]}}
-          </div>
-          <mat-icon *ngIf ="k.displayStyle=='boolean' && k.hide!==true">{{k.cell[x]? "check_circle_black" : "dangerous_black"}}</mat-icon>
 
-
-        </td>
-
-        
-      </ng-container>
-       
-     </tr> -->
 
   
   

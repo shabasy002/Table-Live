@@ -23,34 +23,22 @@ import { Observable, of } from 'rxjs';
 export class ElectionTableComponent implements OnInit {
   @Input() columnConfigurations: Array<ColumnConfiguration> = [];
   @Input() ELEMENT_DATA: Array<any> = [];
+  @Input() defaultSort: string='';
   @Output() arraySource: Array<any> = [];
   sortedData: VotersList[] | any;
   dataSource:Array<any>=[];
-  newVar:Array<any>=[];
+ 
   
  
 
  
   ngOnInit(): void {
-    //this.newVar===(Object.keys(this.ELEMENT_DATA[0]));
-    this.newVar=Object.assign([], Object.keys(this.ELEMENT_DATA[0]));
-    //console.log(this.newVar);
-    for(let i=1;i<this.newVar.length;i++){
-      
-      let tempvar:any=this.newVar[i];
-      //console.log(this.ELEMENT_DATA[i].this.newVar[i])
-    }
+    //this.sortData(name:any);
+    //  console.log(this.defaultSort);
+    this.sortData({active: this.defaultSort, direction: "asc"})
   }
-  getValue (objName:any, i:any){
-   // console.log(objName[i].newVar[i]);
- }
-  sort(val: any) {
-    //alert(val);
-    this.arraySource=[];
-   this.ELEMENT_DATA ===(this.ELEMENT_DATA.sort((a, b) => a[val] > b[val] ? 1 : a[val] < b[val] ? -1 : 0));
-   this.ELEMENT_DATA.forEach(val => this.arraySource.push(Object.assign({}, val)));
-    console.log(this.arraySource)
-    }
+ 
+  
     
   
      
@@ -60,8 +48,9 @@ export class ElectionTableComponent implements OnInit {
       
       this.sortedData = this.ELEMENT_DATA.slice();
       
-     
+      
     }
+    
     sortData(sort: Sort) {
       const data = this.ELEMENT_DATA.slice();
       if (!sort.active || sort.direction === '') {
@@ -70,11 +59,9 @@ export class ElectionTableComponent implements OnInit {
       }
       this.sortedData = data.sort((a, b) => {
         const isAsc = sort.direction === 'asc';
-        switch (sort.active) {
-          case 'name': return compare(a.name, b.name, isAsc);
-          case 'age': return compare(a.age, b.age, isAsc);
-          default: return 0;
-        }
+        return compare(a[sort.active], b[sort.active], isAsc);
+        
+         
       });
 }
 

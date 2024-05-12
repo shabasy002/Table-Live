@@ -19,43 +19,35 @@ import { Output, EventEmitter } from '@angular/core';
 export class AboutUsComponent  {
    
   @Output() dataSource: Array<any> = [];
+  defaultSort="name";
    ELEMENT_DATA: VotersList[] = [
     { name: 'Arjun', age: 32, phone: 8792424, isWhatsappUser: true, constituency: 'Thiruvanthapuram', isEligibleToVote: true, rationCardType: RationCardType.White}, 
     { name: 'Ravi', age: 37, phone: 9898764, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true, rationCardType: RationCardType.Blue},
-    { name: 'Akhil', age: 35, phone: 9998764, isWhatsappUser: true, constituency: 'Kocchi', isEligibleToVote: true},
+    { name: 'Akhil', age: 35, phone: 9998764, isWhatsappUser: true, constituency: 'Kochi', isEligibleToVote: true},
     { name: 'Nkhil', age: 16, phone: 9998713, isWhatsappUser: false, constituency: 'Kottayam', isEligibleToVote: false}
   ];
-  @Output() arraySource: Array<any> = [];
-   
-
+ 
    columnConfigurations: Array<ColumnConfiguration> = [ 
-    { columnDef: 'name', title: 'Name of Citizen',  displayStyle: DisplayStyle.string,   cell:this.ELEMENT_DATA.map(function (user) {
-      return user.name;     
-  })}, 
+    { columnDef: 'name', title: 'Name of Citizen',  displayStyle: DisplayStyle.string     
+  }, 
      
-     { columnDef: 'age', title: 'Age', sortable:true, displayStyle: DisplayStyle.number, cell:this.ELEMENT_DATA.map(function (user) {
-      return user.age;  
-  })}, 
-  { columnDef: 'constituency', title: 'Constituency', hide:true, displayStyle: DisplayStyle.string, cell:this.ELEMENT_DATA.map(function (user) {
-    return user.constituency;  
-})},
-{ columnDef: 'rationCardType', displayStyle: DisplayStyle.string,  title: 'Ration card type', cell:this.ELEMENT_DATA.map(function (user) {
-  return user.rationCardType;  
-})},
-  { columnDef: 'isEligibleToVote', displayStyle: DisplayStyle.boolean,  title: 'Is Eligible To Vote', cell:this.ELEMENT_DATA.map(function (user) {
-    return user.isEligibleToVote;  
-})},
-     { columnDef: 'phone', title: 'Phone', displayStyle: DisplayStyle.number,  cell:this.ELEMENT_DATA.map(function (user) {
-      return user.phone;  
-  })}
+     { columnDef: 'age', title: 'Age', sortable:true, displayStyle: DisplayStyle.number
+  }, 
+  { columnDef: 'constituency', title: 'Constituency', hide:true, displayStyle: DisplayStyle.string 
+},
+{ columnDef: 'rationCardType', displayStyle: DisplayStyle.string,  title: 'Ration card type'  
+},
+  { columnDef: 'isEligibleToVote', displayStyle: DisplayStyle.boolean,  title: 'Is Eligible To Vote'
+},
+     { columnDef: 'phone', title: 'Phone', displayStyle: DisplayStyle.number  
+  }
   ];
   @Input()
   newArr: VotersList[] = [];
   ngOnChanges() {
-    // create header using child_id
-    //console.log(this.dataSource);
+  
   }
   constructor() {
-    console.log(this.arraySource) ;           
+         
   }
 }

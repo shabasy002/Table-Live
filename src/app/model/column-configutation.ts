@@ -1,7 +1,7 @@
 export interface ColumnConfiguration {
 	columnDef: string;
 	title: string;
-    cell:any;
+    //cell:any;
     hide?: boolean;
     sortable?: boolean;
 	displayStyle: DisplayStyle
