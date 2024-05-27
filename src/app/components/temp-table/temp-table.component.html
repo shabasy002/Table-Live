@@ -1,9 +1,9 @@
 <div class="table-component">
   <mat-form-field >
     <mat-label>Filter</mat-label>
-    <mat-select placeholder="filter by" [formControl]="filter" multiple aria-checked="tr">
+    <mat-select (selectionChange)="inputChange($event.value)" [(value)]="selected" placeholder="filter by" [formControl]="this.filter" multiple aria-checked="tr">
       
-      <mat-option (click)="filterMethod(column.columnDef, $event)" *ngFor="let column of this.getColumnsToDisplayForSelect()" [value]="column.columnDef" >{{ column.title }}</mat-option>
+      <mat-option *ngFor="let column of this.getColumnsToDisplayForSelect()" [value]="column.columnDef" >{{ column.title }}</mat-option>
     </mat-select>
   </mat-form-field>
     <table>

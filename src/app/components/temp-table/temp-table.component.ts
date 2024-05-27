@@ -35,7 +35,8 @@ sortedData: Array<any> = [];
 
 private selectedSortOrder?:SelectedSort;
 public filterFields: Array<any> = [];
-public filter = new FormControl(["name", "age", "phone", "rationCardType", "isEligibleToVote"]);
+public filter = new FormControl(this.filterFields);
+  public selected: string | undefined;
 
 constructor() {
   
@@ -43,7 +44,19 @@ constructor() {
 
 }
 
+protected inputChange(event:any){
+  const tempColumnconfig = this.columnConfigs.slice();
+  
+  for(let i=0;i<=this.filterFields.length-1;i++){
+    let fetching = this.columnConfigs.filter(x => x.columnDef === this.filterFields[i]);
+    if (event.indexOf(this.filterFields[i]) == -1){
+          fetching[0].hide=true;
+        }else{
+          fetching[0].hide=false;
+    }
+  }
 
+}
 protected filterMethod(value:string, $event:any){
   
   
@@ -67,6 +80,9 @@ protected filterMethod(value:string, $event:any){
 protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
 
   const filtered = this.columnConfigs.filter(x => x.columnDef !== "");
+  filtered.forEach((x,i)=>{
+    this.filterFields.push(x.columnDef) ;    
+  })
  
   return filtered;
 }
@@ -77,7 +93,7 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
     return filtered;
   }
   protected getDataForKeyFromRow(row: Object): any {
-    //console.log(row);
+   
     return row as any;
   }
 public getSample():any{
@@ -94,16 +110,16 @@ public getSample():any{
   }
   protected sortData($event: any, fieldName:string, sortOrder:SortOrder) {
     const data = this.dataSource.slice();
-    //console.log(this.sortedData);
+    
     this.selectedSortOrder={columnDef:fieldName, order:sortOrder};
     if(sortOrder === 'ASC'){
-      //console.log($event.srcElement);
+     
        this.sortedData=data.sort((a, b) => b[fieldName] > a[fieldName]? 1 : -1);
     }else{
       this.sortedData=data.sort((a, b) => a[fieldName] > b[fieldName]? 1 : -1);
     }
     
-    //console.log(this.sortedData);
+    
     this.dataSource.length=0;
     this.sortedData.forEach((x,i)=>{
       this.dataSource.push(x) ;    
