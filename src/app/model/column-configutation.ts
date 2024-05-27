@@ -1,4 +1,5 @@
 export interface ColumnConfiguration {
+  
 	columnDef: string;
 	title: string;
     //cell:any;
@@ -19,4 +20,10 @@ export enum RationCardType {
 	White = 'white',
 	Green = 'green',
 	Blue = 'blue'
+}
+
+export type SortOrder = 'ASC' | 'DESC';
+export interface SelectedSort{
+	columnDef:string;
+	order:SortOrder;
 }

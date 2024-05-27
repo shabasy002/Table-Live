@@ -1,0 +1,32 @@
+<div class="table-component">
+  <mat-form-field >
+    <mat-label>Filter</mat-label>
+    <mat-select placeholder="filter by" [formControl]="filter" multiple aria-checked="tr">
+      
+      <mat-option (click)="filterMethod(column.columnDef, $event)" *ngFor="let column of this.getColumnsToDisplayForSelect()" [value]="column.columnDef" >{{ column.title }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+    <table>
+        <thead>
+            <tr>
+                <td *ngFor="let column of this.getColumnsToDisplay()" >
+                  
+                  <span>{{ column.title }}</span>
+                  <div *ngIf="column.sortable">
+                    <i class="material-icons dp48" [ngClass]="this.isCurrentSortOrder(column.columnDef, 'DESC')?'selected':''" (click)="sortData($event, column.columnDef, 'DESC')">arrow_upward</i>
+                    <i class="material-icons dp48" [ngClass]="this.isCurrentSortOrder(column.columnDef, 'ASC')?'selected':''" (click)="sortData($event, column.columnDef, 'ASC')">arrow_downward</i>
+                  </div>
+                  </td>
+            </tr>
+            </thead>
+            
+            <tbody>
+                <tr *ngFor="let row of this.dataSource">
+                  <td *ngFor="let column of this.getColumnsToDisplay()">
+                    {{ this.getDataForKeyFromRow(row[column.columnDef]) }} 
+                  </td>
+                </tr>
+              </tbody>
+       
+    </table>
+</div>

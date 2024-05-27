@@ -1,0 +1,40 @@
+table {
+    border-collapse: collapse;
+    //width: 500px;
+    margin:0 auto;
+    tr {
+        border-bottom: 1px solid #ddd;
+        padding: 20px;
+        th, td{
+            text-align: center;
+            padding: 20px 20px;
+        }
+      }
+
+      thead td {
+        div{
+            display: flex;
+            cursor: pointer;
+        }
+        span{
+            float: left;
+        }
+        
+      }
+  }
+  .mat-select {
+    ::ng-deep .mat-select-content {
+      width: 100%;
+    }
+    ::ng-deep .mat-select-value {
+      color: green /*!important*/;
+    }
+}
+.mat-select-disabled {
+    ::ng-deep .mat-select-value {
+      color: black /*!important*/;
+    }
+}
+.selected{
+    color: red;
+  }

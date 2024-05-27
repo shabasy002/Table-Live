@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
+import { TempTableComponent } from '../../components/temp-table/temp-table.component';
+
 import { ElectionTableComponent } from '../../components/election-table/election-table.component';
 import { ColumnConfiguration } from '../../model/column-configutation';
 import { VotersList } from '../../model/voters-list';
@@ -11,7 +13,7 @@ import { Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [TableComponent, ElectionTableComponent],
+  imports: [TableComponent, ElectionTableComponent, TempTableComponent],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss'
 })
@@ -28,7 +30,7 @@ export class AboutUsComponent  {
   ];
  
    columnConfigurations: Array<ColumnConfiguration> = [ 
-    { columnDef: 'name', title: 'Name of Citizen',  displayStyle: DisplayStyle.string     
+    { columnDef: 'name', title: 'Name of Citizen',  sortable:true, displayStyle: DisplayStyle.string     
   }, 
      
      { columnDef: 'age', title: 'Age', sortable:true, displayStyle: DisplayStyle.number

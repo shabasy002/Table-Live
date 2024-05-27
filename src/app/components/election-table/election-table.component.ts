@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, Input, OnInit, input} from '@angular/core';
+import {Component, Input, OnInit, input,  OnChanges, OnDestroy,SimpleChange} from '@angular/core';
 import {Sort, MatSortModule} from '@angular/material/sort';
 
 import { FormsModule } from '@angular/forms';
@@ -21,16 +21,24 @@ import { Observable, of } from 'rxjs';
 })
 
 export class ElectionTableComponent implements OnInit {
-  @Input() columnConfigurations: Array<ColumnConfiguration> = [];
-  @Input() ELEMENT_DATA: Array<any> = [];
-  @Input() defaultSort: string='';
-  @Output() arraySource: Array<any> = [];
+   @Input({ required: true }) 
+   public columnConfigurations: Array<ColumnConfiguration> = [];
+
+   @Input({ required: true }) 
+   public ELEMENT_DATA: Array<any> = [];
+
+  @Input() 
+  public defaultSort: string='';
+
   sortedData: VotersList[] | any;
   dataSource:Array<any>=[];
+  dataToDisplay: any[] | undefined;
  
   
  
-
+public ngOnChanges(changes: SimpleChange): void {
+    
+  }
  
   ngOnInit(): void {
     //this.sortData(name:any);
