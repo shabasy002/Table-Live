@@ -23,7 +23,7 @@
             <tbody>
                 <tr *ngFor="let row of this.dataSource">
                   <td *ngFor="let column of this.getColumnsToDisplay()">
-                    {{ this.getDataForKeyFromRow(row[column.columnDef]) }} 
+                    {{ row[column.columnDef] }} 
                   </td>
                 </tr>
               </tbody>

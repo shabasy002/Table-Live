@@ -78,7 +78,7 @@ protected filterMethod(value:string, $event:any){
   }
 }
 protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
-
+  console.log(this.getColumnsToDisplay("Akhil"));
   const filtered = this.columnConfigs.filter(x => x.columnDef !== "");
   filtered.forEach((x,i)=>{
     this.filterFields.push(x.columnDef) ;    
@@ -86,19 +86,25 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
  
   return filtered;
 }
-   protected getColumnsToDisplay(): ColumnConfiguration[] {
-
-    const filtered = this.columnConfigs.filter(x => x.hide !== true);
-   
-    return filtered;
+   protected getColumnsToDisplay(optionalName?: any): ColumnConfiguration[] {
+    if (typeof optionalName === "undefined") {
+      const filtered = this.columnConfigs.filter(x => x.hide !== true);
+      return filtered;
+      
+    }else{
+      const rowSearch=this.dataSource.filter(x => x.name.toLocaleLowerCase().includes(optionalName));
+      //console.log(rowSearch);
+      return rowSearch;
+    }
+    
   }
   protected getDataForKeyFromRow(row: Object): any {
    
-    return row as any;
+    return row as string;
   }
 public getSample():any{
     const sampleUnfiltered=this.columnConfigs.filter(x => x.hide !== true);
-    console.log(this.dataSource);
+    //console.log(this.dataSource);
     return [];
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -124,7 +130,7 @@ public getSample():any{
     this.sortedData.forEach((x,i)=>{
       this.dataSource.push(x) ;    
     })
-    console.log(this.dataSource);
+    //console.log(this.dataSource);
     
   }
   
