@@ -1,13 +1,34 @@
 <div class="table-component">
-  <mat-form-field >
+  <!-- <mat-form-field >
     <mat-label>Filter</mat-label>
     <mat-select (selectionChange)="inputChange($event.value)" [(value)]="selected" placeholder="filter by" [formControl]="this.filter" multiple aria-checked="tr">
       
       <mat-option *ngFor="let column of this.getColumnsToDisplayForSelect()" [value]="column.columnDef" >{{ column.title }}</mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
     <table>
         <thead>
+          <tr>
+            <td>
+              <mat-form-field >
+                <mat-label>Filter</mat-label>
+                <mat-select (selectionChange)="inputChange($event.value)" [(value)]="selected" placeholder="filter by" [formControl]="this.filter" multiple aria-checked="tr">
+                  
+                  <mat-option *ngFor="let column of this.getColumnsToDisplayForSelect()" [value]="column.columnDef" >{{ column.title }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="filter" >
+                <mat-label>Search name</mat-label>
+                <input matInput [formControl]="nameFilter" (input)="didModify()">
+              </mat-form-field>
+              <p>{{this.nameFilter.value}}</p>
+            </td>
+          </tr>
+          <tr>
+            
+          </tr>
             <tr>
                 <td *ngFor="let column of this.getColumnsToDisplay()" >
                   

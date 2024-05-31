@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {Component, Input, OnInit, input,  OnChanges, OnDestroy,SimpleChange, SimpleChanges} from '@angular/core';
 import {Sort, MatSortModule} from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -19,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @Component({
   selector: 'app-temp-table',
   standalone: true,
-  imports: [MatTableModule, ReactiveFormsModule ,MatFormFieldModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
+  imports: [MatTableModule, ReactiveFormsModule ,MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
   templateUrl: './temp-table.component.html',
   styleUrl: './temp-table.component.scss'
 })
@@ -36,14 +37,22 @@ sortedData: Array<any> = [];
 private selectedSortOrder?:SelectedSort;
 public filterFields: Array<any> = [];
 public filter = new FormControl(this.filterFields);
-  public selected: string | undefined;
+public nameFilter = new FormControl("");
+
+public selected: string | undefined;
 
 constructor() {
   
   
 
 }
+protected didModify() {
+  //console.log(this.nameFilter);
 
+  console.log(this.getColumnsToDisplay(this.nameFilter.value));
+  
+ 
+}
 protected inputChange(event:any){
   const tempColumnconfig = this.columnConfigs.slice();
   
@@ -57,28 +66,9 @@ protected inputChange(event:any){
   }
 
 }
-protected filterMethod(value:string, $event:any){
-  
-  
-  let selctedOrnot=$event.currentTarget.getAttribute("aria-selected");
-  let optionValue=value;
-  if(selctedOrnot==="true"){
-        
-  this.columnConfigs.forEach(function(item) {
-    if(item.columnDef===optionValue){
-      item.hide=true;
-    }
-});
-  }else{
-    this.columnConfigs.forEach(function(item) {
-      if(item.columnDef===optionValue){
-        item.hide=false;
-      }
-  });
-  }
-}
+
 protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
-  console.log(this.getColumnsToDisplay("Akhil"));
+  //console.log(this.getColumnsToDisplay("kh"));
   const filtered = this.columnConfigs.filter(x => x.columnDef !== "");
   filtered.forEach((x,i)=>{
     this.filterFields.push(x.columnDef) ;    
@@ -92,7 +82,7 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
       return filtered;
       
     }else{
-      const rowSearch=this.dataSource.filter(x => x.name.toLocaleLowerCase().includes(optionalName));
+      const rowSearch=this.dataSource.filter(x => x.name.match(optionalName));
       //console.log(rowSearch);
       return rowSearch;
     }
