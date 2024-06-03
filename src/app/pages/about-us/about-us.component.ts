@@ -24,10 +24,10 @@ export class AboutUsComponent  {
   defaultSort="name";
    ELEMENT_DATA: VotersList[] = [
     { name: 'Arjun', age: 32, phone: 8792424, isWhatsappUser: true, constituency: 'Thiruvanthapuram', isEligibleToVote: true, rationCardType: RationCardType.White}, 
-    { name: 'Ravi', age: 37, phone: 9898764, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true, rationCardType: RationCardType.Blue},
+    { name: 'Ravi', age: 37, phone: 9898764, hide:true, isWhatsappUser: false, constituency: 'Kollam', isEligibleToVote: true, rationCardType: RationCardType.Blue},
     { name: 'Akhil', age: 35, phone: 9998764, isWhatsappUser: true, constituency: 'Kochi', isEligibleToVote: true},
     { name: 'Akshay', age: 39, phone: 999884, isWhatsappUser: true, constituency: 'Idukki', isEligibleToVote: true},
-    { name: 'Nkhil', age: 16, phone: 9998713, isWhatsappUser: false, constituency: 'Kottayam', isEligibleToVote: false}
+    { name: 'Nikhil', age: 16, phone: 9998713, isWhatsappUser: false, constituency: 'Kottayam', isEligibleToVote: false}
   ];
  
    columnConfigurations: Array<ColumnConfiguration> = [ 

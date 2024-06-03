@@ -36,6 +36,7 @@ sortedData: Array<any> = [];
 
 private selectedSortOrder?:SelectedSort;
 public filterFields: Array<any> = [];
+public filterNames:Array<any>=[];
 public filter = new FormControl(this.filterFields);
 public nameFilter = new FormControl("");
 
@@ -46,14 +47,37 @@ constructor() {
   
 
 }
-protected didModify() {
-  //console.log(this.nameFilter);
+protected searchByname() {
+  //console.log(this.nameFilter.value);
+  const tempdataSource = this.dataSource.slice();
+  if(this.nameFilter.value !==''){
+    this.filterNames.length=0;
+    
+    const nameSearch=this.dataSource.filter(x => x.name.match(this.nameFilter.value) && x.hide !==true );
+   if(nameSearch.length>0){      
+    for(let j=0;j<=nameSearch.length-1;j++){
+      this.filterNames.push(nameSearch[j].name);
+    }
+    for(let k=0;k<=this.dataSource.length-1;k++){
+      this.dataSource[k].hide=false;
+     if(this.filterNames.includes(this.dataSource[k].name)){
+      this.dataSource[k].hide=false;
+     }else{
+      this.dataSource[k].hide=true;
+     }
+    }
+   }else{
+    console.log("no names found");
+   }
+  }else{
+    for(let k=0;k<=this.dataSource.length-1;k++){
+      this.dataSource[k].hide=false;
+    }
+  }
 
-  console.log(this.getColumnsToDisplay(this.nameFilter.value));
-  
- 
 }
 protected inputChange(event:any){
+  
   const tempColumnconfig = this.columnConfigs.slice();
   
   for(let i=0;i<=this.filterFields.length-1;i++){
@@ -87,6 +111,12 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
       return rowSearch;
     }
     
+  }
+
+  protected getrowtoDisplay():any[]{
+    const rowFiltered = this.dataSource.filter(x => x.hide !== true);
+    //console.log(rowFiltered);
+    return rowFiltered;
   }
   protected getDataForKeyFromRow(row: Object): any {
    

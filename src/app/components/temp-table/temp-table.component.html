@@ -1,11 +1,5 @@
 <div class="table-component">
-  <!-- <mat-form-field >
-    <mat-label>Filter</mat-label>
-    <mat-select (selectionChange)="inputChange($event.value)" [(value)]="selected" placeholder="filter by" [formControl]="this.filter" multiple aria-checked="tr">
-      
-      <mat-option *ngFor="let column of this.getColumnsToDisplayForSelect()" [value]="column.columnDef" >{{ column.title }}</mat-option>
-    </mat-select>
-  </mat-form-field> -->
+  
     <table>
         <thead>
           <tr>
@@ -21,7 +15,7 @@
             <td>
               <mat-form-field class="filter" >
                 <mat-label>Search name</mat-label>
-                <input matInput [formControl]="nameFilter" (input)="didModify()">
+                <input matInput [formControl]="nameFilter" (input)="searchByname()">
               </mat-form-field>
               <p>{{this.nameFilter.value}}</p>
             </td>
@@ -42,9 +36,12 @@
             </thead>
             
             <tbody>
-                <tr *ngFor="let row of this.dataSource">
-                  <td *ngFor="let column of this.getColumnsToDisplay()">
-                    {{ row[column.columnDef] }} 
+                <tr *ngFor="let row of this.getrowtoDisplay()">
+                  <td  *ngFor="let column of this.getColumnsToDisplay()">
+                    <div >
+                      {{ row[column.columnDef] }} 
+                    </div>
+                    
                   </td>
                 </tr>
               </tbody>
