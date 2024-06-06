@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, Input, OnInit, input,  OnChanges, OnDestroy,SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, input,  OnChanges, OnDestroy,SimpleChange, SimpleChanges, DoCheck, AfterContentInit} from '@angular/core';
 import {Sort, MatSortModule} from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 
@@ -24,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   templateUrl: './temp-table.component.html',
   styleUrl: './temp-table.component.scss'
 })
-export class TempTableComponent implements OnChanges {
+export class TempTableComponent implements AfterContentInit ,DoCheck, OnInit, OnChanges {
 
   //public toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
@@ -46,6 +46,22 @@ constructor() {
   
   
 
+}
+ 
+  ngDoCheck(): void {
+    console.log(this.getrowtoDisplay());
+  }
+ngOnInit(): void {
+  //console.log("component has been initialized!")
+  //throw new Error('Method not implemented.');
+}
+ngOnChanges(changes: SimpleChanges): void {
+  
+  //console.log(changes["dataSource"]);
+}
+
+ngAfterContentInit(): void {
+  console.log(this.ngDoCheck.length)
 }
 protected searchByname() {
   //console.log(this.nameFilter.value);
@@ -122,14 +138,8 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
    
     return row as string;
   }
-public getSample():any{
-    const sampleUnfiltered=this.columnConfigs.filter(x => x.hide !== true);
-    //console.log(this.dataSource);
-    return [];
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  }
+ 
+ 
   protected isCurrentSortOrder(fieldName:string, sortOrder:SortOrder):boolean{
     return fieldName===this.selectedSortOrder?.columnDef && sortOrder===this.selectedSortOrder.order;
      
