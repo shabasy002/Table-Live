@@ -15,9 +15,9 @@
             <td>
               <mat-form-field class="filter" >
                 <mat-label>Search name</mat-label>
-                <input matInput [formControl]="nameFilter" (input)="searchByname()">
+                <input matInput [formControl]="nameFilter" (ngModelChange)="searchByname()">
               </mat-form-field>
-              <p>{{this.nameFilter.value}}</p>
+              
             </td>
           </tr>
           <tr>

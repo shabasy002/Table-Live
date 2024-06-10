@@ -49,22 +49,21 @@ constructor() {
 }
  
   ngDoCheck(): void {
-    console.log(this.getrowtoDisplay());
+    //console.log(this.getrowtoDisplay());
   }
 ngOnInit(): void {
-  //console.log("component has been initialized!")
-  //throw new Error('Method not implemented.');
+  
 }
 ngOnChanges(changes: SimpleChanges): void {
   
-  //console.log(changes["dataSource"]);
+
 }
 
 ngAfterContentInit(): void {
-  console.log(this.ngDoCheck.length)
+ 
 }
 protected searchByname() {
-  //console.log(this.nameFilter.value);
+
   const tempdataSource = this.dataSource.slice();
   if(this.nameFilter.value !==''){
     this.filterNames.length=0;
@@ -108,7 +107,7 @@ protected inputChange(event:any){
 }
 
 protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
-  //console.log(this.getColumnsToDisplay("kh"));
+
   const filtered = this.columnConfigs.filter(x => x.columnDef !== "");
   filtered.forEach((x,i)=>{
     this.filterFields.push(x.columnDef) ;    
@@ -123,7 +122,7 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
       
     }else{
       const rowSearch=this.dataSource.filter(x => x.name.match(optionalName));
-      //console.log(rowSearch);
+     
       return rowSearch;
     }
     
@@ -131,7 +130,7 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
 
   protected getrowtoDisplay():any[]{
     const rowFiltered = this.dataSource.filter(x => x.hide !== true);
-    //console.log(rowFiltered);
+    
     return rowFiltered;
   }
   protected getDataForKeyFromRow(row: Object): any {
@@ -160,7 +159,7 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
     this.sortedData.forEach((x,i)=>{
       this.dataSource.push(x) ;    
     })
-    //console.log(this.dataSource);
+   
     
   }
   
