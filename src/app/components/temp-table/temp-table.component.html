@@ -1,5 +1,6 @@
 <div class="table-component">
-  
+  <div appHightlight>Election table</div>
+
     <table>
         <thead>
           <tr>
@@ -15,7 +16,7 @@
             <td>
               <mat-form-field class="filter" >
                 <mat-label>Search name</mat-label>
-                <input matInput [formControl]="nameFilter" (ngModelChange)="searchByname()">
+                <input matInput [formControl]="nameFilter" >
               </mat-form-field>
               
             </td>

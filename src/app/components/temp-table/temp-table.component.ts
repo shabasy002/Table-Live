@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {Component, Input, OnInit, input,  OnChanges, OnDestroy,SimpleChange, SimpleChanges, DoCheck, AfterContentInit} from '@angular/core';
 import {Sort, MatSortModule} from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
-
+import { HightlightDirective } from '../../custom-directives/hightlight.directive';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @Component({
   selector: 'app-temp-table',
   standalone: true,
-  imports: [MatTableModule, ReactiveFormsModule ,MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
+  imports: [MatTableModule, HightlightDirective, ReactiveFormsModule ,MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
   templateUrl: './temp-table.component.html',
   styleUrl: './temp-table.component.scss'
 })
@@ -48,22 +48,26 @@ constructor() {
 
 }
  
-  ngDoCheck(): void {
-    //console.log(this.getrowtoDisplay());
+ngDoCheck(): void {
+  
+ //this.dataSource.filter(x => x.name.match(this.nameFilter.value) && x.hide !==true );
+    //console.log(this.getrowtoDisplay('value'));
   }
 ngOnInit(): void {
-  
+ 
+
 }
+
 ngOnChanges(changes: SimpleChanges): void {
   
-
+  
 }
 
 ngAfterContentInit(): void {
  
 }
 protected searchByname() {
-
+console.log(this.nameFilter.value);
   const tempdataSource = this.dataSource.slice();
   if(this.nameFilter.value !==''){
     this.filterNames.length=0;
@@ -82,7 +86,7 @@ protected searchByname() {
      }
     }
    }else{
-    console.log("no names found");
+    //console.log("no names found");
    }
   }else{
     for(let k=0;k<=this.dataSource.length-1;k++){
@@ -129,7 +133,15 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
   }
 
   protected getrowtoDisplay():any[]{
-    const rowFiltered = this.dataSource.filter(x => x.hide !== true);
+
+    let value=(this.nameFilter.value);
+    if(value){
+      var rowFiltered = this.dataSource.filter(x => x.name.match(this.nameFilter.value) && x.hide !==true );
+      //console.log(value);
+    }else{
+      var rowFiltered = this.dataSource.filter(x => x.hide !== true);
+    }
+   
     
     return rowFiltered;
   }
