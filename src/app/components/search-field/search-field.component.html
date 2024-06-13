@@ -1,0 +1,4 @@
+<mat-form-field class="filter" >
+    <mat-label>Search By Name</mat-label>
+     <input matInput [formControl]="nameFilter" (ngModelChange)="getValue($event)"> 
+  </mat-form-field>

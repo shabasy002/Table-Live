@@ -14,10 +14,11 @@
               </mat-form-field>
             </td>
             <td>
-              <mat-form-field class="filter" >
+              <!-- <mat-form-field class="filter" >
                 <mat-label>Search name</mat-label>
                 <input matInput [formControl]="nameFilter" >
-              </mat-form-field>
+              </mat-form-field> -->
+              <app-search-field (messageEvent)="getdatafrom($event)"></app-search-field>
               
             </td>
           </tr>

@@ -10,17 +10,16 @@ import { Output, EventEmitter } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import { ColumnConfiguration, RationCardType, SelectedSort } from '../../model/column-configutation';
 import { SortOrder } from '../../model/column-configutation';
-
+import { SearchFieldComponent } from '../search-field/search-field.component';
 import { VotersList } from '../../model/voters-list';
 import { Observable, of } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 @Component({
   selector: 'app-temp-table',
   standalone: true,
-  imports: [MatTableModule, HightlightDirective, ReactiveFormsModule ,MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
+  imports: [MatTableModule, SearchFieldComponent, HightlightDirective, ReactiveFormsModule ,MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
   templateUrl: './temp-table.component.html',
   styleUrl: './temp-table.component.scss'
 })
@@ -38,24 +37,25 @@ private selectedSortOrder?:SelectedSort;
 public filterFields: Array<any> = [];
 public filterNames:Array<any>=[];
 public filter = new FormControl(this.filterFields);
-public nameFilter = new FormControl("");
+//public nameFilter = new FormControl("");
 
 public selected: string | undefined;
+messageEvent: any;
 
+ 
 constructor() {
   
   
 
 }
- 
+
 ngDoCheck(): void {
   
- //this.dataSource.filter(x => x.name.match(this.nameFilter.value) && x.hide !==true );
-    //console.log(this.getrowtoDisplay('value'));
+ 
   }
 ngOnInit(): void {
  
-
+  
 }
 
 ngOnChanges(changes: SimpleChanges): void {
@@ -66,34 +66,9 @@ ngOnChanges(changes: SimpleChanges): void {
 ngAfterContentInit(): void {
  
 }
-protected searchByname() {
-console.log(this.nameFilter.value);
-  const tempdataSource = this.dataSource.slice();
-  if(this.nameFilter.value !==''){
-    this.filterNames.length=0;
-    
-    const nameSearch=this.dataSource.filter(x => x.name.match(this.nameFilter.value) && x.hide !==true );
-   if(nameSearch.length>0){      
-    for(let j=0;j<=nameSearch.length-1;j++){
-      this.filterNames.push(nameSearch[j].name);
-    }
-    for(let k=0;k<=this.dataSource.length-1;k++){
-      this.dataSource[k].hide=false;
-     if(this.filterNames.includes(this.dataSource[k].name)){
-      this.dataSource[k].hide=false;
-     }else{
-      this.dataSource[k].hide=true;
-     }
-    }
-   }else{
-    //console.log("no names found");
-   }
-  }else{
-    for(let k=0;k<=this.dataSource.length-1;k++){
-      this.dataSource[k].hide=false;
-    }
-  }
-
+protected getdatafrom(e:any){
+  this.messageEvent=e;
+ 
 }
 protected inputChange(event:any){
   
@@ -133,11 +108,9 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
   }
 
   protected getrowtoDisplay():any[]{
-
-    let value=(this.nameFilter.value);
+    let value=(this.messageEvent);
     if(value){
-      var rowFiltered = this.dataSource.filter(x => x.name.match(this.nameFilter.value) && x.hide !==true );
-      //console.log(value);
+      var rowFiltered = this.dataSource.filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true );
     }else{
       var rowFiltered = this.dataSource.filter(x => x.hide !== true);
     }
