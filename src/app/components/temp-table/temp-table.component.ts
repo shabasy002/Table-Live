@@ -40,7 +40,7 @@ public filter = new FormControl(this.filterFields);
 //public nameFilter = new FormControl("");
 
 public selected: string | undefined;
-messageEvent: any;
+searchEvent: any;
 
  
 constructor() {
@@ -66,8 +66,8 @@ ngOnChanges(changes: SimpleChanges): void {
 ngAfterContentInit(): void {
  
 }
-protected getdatafrom(e:any){
-  this.messageEvent=e;
+protected getDatafrom(e:any){
+  this.searchEvent=e;
  
 }
 protected inputChange(event:any){
@@ -108,11 +108,12 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
   }
 
   protected getrowtoDisplay():any[]{
-    let value=(this.messageEvent);
+    let value=(this.searchEvent);
     if(value){
       var rowFiltered = this.dataSource.filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true );
     }else{
       var rowFiltered = this.dataSource.filter(x => x.hide !== true);
+      
     }
    
     

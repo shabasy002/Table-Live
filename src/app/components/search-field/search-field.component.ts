@@ -16,14 +16,14 @@ export class SearchFieldComponent {
   @Output() searchText: string = '';
   public nameFilter = new FormControl("");
   public valueTosend:any;
-  @Output() messageEvent = new EventEmitter<any>();
+  @Output() searchEvent = new EventEmitter<any>();
  constructor(){
   
  }
 
  getValue($event:any){
   this.valueTosend=(this.nameFilter.value);
-  this.messageEvent.emit(this.valueTosend);
+  this.searchEvent.emit(this.valueTosend);
  }
  
 

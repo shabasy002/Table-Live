@@ -14,11 +14,8 @@
               </mat-form-field>
             </td>
             <td>
-              <!-- <mat-form-field class="filter" >
-                <mat-label>Search name</mat-label>
-                <input matInput [formControl]="nameFilter" >
-              </mat-form-field> -->
-              <app-search-field (messageEvent)="getdatafrom($event)"></app-search-field>
+             
+              <app-search-field (searchEvent)="getDatafrom($event)"></app-search-field>
               
             </td>
           </tr>
@@ -40,9 +37,13 @@
             <tbody>
                 <tr *ngFor="let row of this.getrowtoDisplay()">
                   <td  *ngFor="let column of this.getColumnsToDisplay()">
-                    <div >
+                    <div  *ngIf="row[column.columnDef]; else elseBlock">
+                     
                       {{ row[column.columnDef] }} 
                     </div>
+                    <ng-template #elseBlock>
+                      no data available!
+                    </ng-template>
                     
                   </td>
                 </tr>
