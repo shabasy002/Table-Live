@@ -34,20 +34,33 @@
             </tr>
             </thead>
             
-            <tbody>
+            <tbody *ngIf="this.getrowtoDisplay().length!==0;else other_content" class="xyz">
                 <tr *ngFor="let row of this.getrowtoDisplay()">
                   <td  *ngFor="let column of this.getColumnsToDisplay()">
-                    <div  *ngIf="row[column.columnDef]; else elseBlock">
+                    <div  >
                      
                       {{ row[column.columnDef] }} 
                     </div>
-                    <ng-template #elseBlock>
-                      no data available!
-                    </ng-template>
+                    
+                    
+                  </td>
+                </tr>
+            </tbody>
+            <ng-template #other_content>
+              <tbody  class="abc">
+                <tr >
+                  <td  >
+                    <div  >
+                      
+                    No data to display
+                    </div>
+                    
                     
                   </td>
                 </tr>
               </tbody>
+            </ng-template>
+            
        
     </table>
 </div>

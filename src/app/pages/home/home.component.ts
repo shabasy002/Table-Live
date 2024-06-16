@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiCallService } from '../../services/api-call.service';
 import { HightlightDirective } from '../../custom-directives/hightlight.directive';
 import { response } from 'express';
+
 @Component({
   selector: 'app-home',
   standalone: true,
