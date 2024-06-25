@@ -1,4 +1,6 @@
+<form [formGroup]="searchForm">
 <mat-form-field class="filter" >
     <mat-label>Search By Name</mat-label>
-     <input matInput [formControl]="nameFilter" (ngModelChange)="getValue($event)"> 
+     <input matInput formControlName="nameFilter1"  (keyup)="getValue()"> 
   </mat-form-field>
+</form>

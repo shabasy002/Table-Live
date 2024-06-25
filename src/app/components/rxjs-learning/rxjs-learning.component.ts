@@ -49,3 +49,6 @@ export class RxjsLearningComponent implements OnInit{
    })
  }
 }
+// debounce
+// form control
+// dependency injection

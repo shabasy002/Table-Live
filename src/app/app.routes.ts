@@ -5,6 +5,7 @@ import {HomeComponent} from '../app/pages/home/home.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { AdminModule } from './admin/admin.module';
 import { RxjsLearningComponent } from './components/rxjs-learning/rxjs-learning.component';
+import { AngularDebounceComponent } from './components/angular-debounce/angular-debounce.component';
 
 export const routes: Routes = [
 
@@ -17,6 +18,11 @@ export const routes: Routes = [
         path: 'rxjs',
         //loadComponent:()=>import('./components/rxjs-learning/rxjs-learning.component').then((comp=>comp.RxjsLearningComponent))
         component: RxjsLearningComponent
+    },
+    {
+        path: 'debounce',
+        //loadComponent:()=>import('./components/rxjs-learning/rxjs-learning.component').then((comp=>comp.RxjsLearningComponent))
+        component: AngularDebounceComponent
     },
     {
         path: '',

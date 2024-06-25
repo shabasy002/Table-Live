@@ -40,7 +40,7 @@ public filter = new FormControl(this.filterFields);
 //public nameFilter = new FormControl("");
 
 public selected: string | undefined;
-searchEvent: any;
+searchEvent: string='';
 
  
 constructor() {
@@ -54,7 +54,7 @@ ngDoCheck(): void {
  
   }
 ngOnInit(): void {
- 
+ //this.dataSource=localStorage.getItem("tempDatasource")
   
 }
 
@@ -66,7 +66,7 @@ ngOnChanges(changes: SimpleChanges): void {
 ngAfterContentInit(): void {
  
 }
-protected getDatafrom(e:any){
+protected getDatafrom(e:string){
   this.searchEvent=e;
  
 }
@@ -143,9 +143,12 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
     
     this.dataSource.length=0;
     this.sortedData.forEach((x,i)=>{
-      this.dataSource.push(x) ;    
+      this.dataSource.push(x) ;   
+      
     })
    
+    localStorage.setItem("tempDatasource", JSON.stringify(this.dataSource));
+    localStorage.getItem("tempDatasource");
     
   }
   
