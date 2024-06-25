@@ -8,7 +8,7 @@ export class ApiCallService {
   constructor(private http:HttpClient) { }
 
   getPost(){
-    return this.http.get<any>("http://dummyjson.com/users");
+    return this.http.get<any>("https://jsonplaceholder.typicode.com/users");
   }
 }
 

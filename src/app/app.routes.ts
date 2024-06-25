@@ -6,6 +6,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { AdminModule } from './admin/admin.module';
 import { RxjsLearningComponent } from './components/rxjs-learning/rxjs-learning.component';
 import { AngularDebounceComponent } from './components/angular-debounce/angular-debounce.component';
+import { TabbedStructureComponent } from './components/tabbed-structure/tabbed-structure.component';
 
 export const routes: Routes = [
 
@@ -23,6 +24,11 @@ export const routes: Routes = [
         path: 'debounce',
         //loadComponent:()=>import('./components/rxjs-learning/rxjs-learning.component').then((comp=>comp.RxjsLearningComponent))
         component: AngularDebounceComponent
+    },
+    {
+        path: 'tabs',
+        //loadComponent:()=>import('./components/rxjs-learning/rxjs-learning.component').then((comp=>comp.RxjsLearningComponent))
+        component: TabbedStructureComponent
     },
     {
         path: '',

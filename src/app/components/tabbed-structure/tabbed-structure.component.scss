@@ -1,0 +1,29 @@
+
+
+.mat-tab-list{
+    background: #000;
+    color: #fff;
+    padding: 30px;
+    min-height: 300px;
+
+    .content
+        {
+            padding: 30px;
+            table{
+                th, td {
+                    padding: 15px;
+                  }
+            }
+           
+        }
+    
+}
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    color:#000 !important;
+    background-color: rgb(79, 128, 0) !important;
+    }
+    
+    ::ng-deep .mat-tab-list .mat-tab-labels {
+    color:blue !important;
+    background-color: yellow !important;
+    }

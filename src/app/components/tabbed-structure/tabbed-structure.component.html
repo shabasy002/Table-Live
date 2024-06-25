@@ -1,0 +1,38 @@
+<mat-tab-group class="mat-tab-list">
+    <mat-tab *ngFor="let user of userArray" label="{{user.name}}">
+        <div class="content">
+           
+
+            <table border="1" >
+                <thead>
+                    <tr >
+                        <th *ngFor="let k of this.getuserKeys()">{{k}}</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                       
+                        <td *ngFor="let v of this.getuserKeys()">
+                            {{this.typeOf(user[v])}}
+                           
+                        </td>
+                    </tr>
+                </tbody>
+               
+                </table>
+            <!-- <div>
+            
+                <p><strong>Email:</strong>{{user.email}}</p> 
+              </div>
+             <div>
+               <p><strong>Address:</strong>{{this.getUserdetails(user.name)}};</p> 
+             </div>
+             <div>
+                <p><strong>Phone:</strong>{{user.phone}}</p> 
+              </div> -->
+        </div>
+        
+        
+    </mat-tab>
+  
+  </mat-tab-group>
