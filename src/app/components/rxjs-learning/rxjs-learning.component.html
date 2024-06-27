@@ -1,1 +1,9 @@
 <div *ngIf="agentName">{{agentName}}</div>
+
+<button #validate (click)="rxjsEventObservable()">
+    click here for observable
+</button>
+
+<a href="www.bbc.com" #getLink (mouseover)="getEventObservable()">
+    Root Link
+</a>

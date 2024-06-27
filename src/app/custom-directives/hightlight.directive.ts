@@ -16,6 +16,6 @@ export class HightlightDirective implements OnInit{
 @HostBinding('attr.class') role = 'admin';
 
 ngOnInit(): void {
-  console.log("directive init");
+  //console.log("directive init");
 }
 }

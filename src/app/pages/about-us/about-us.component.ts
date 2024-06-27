@@ -20,7 +20,7 @@ import { Output, EventEmitter } from '@angular/core';
 
 export class AboutUsComponent  {
    
-  @Output() dataSource: Array<any> = [];
+  //@Output() dataSource: Array<any> = [];
   defaultSort="name";
    ELEMENT_DATA: VotersList[] = [
     { name: 'Arjun', age: 32, phone: 8792424, isWhatsappUser: true, constituency: 'Thiruvanthapuram', isEligibleToVote: true, rationCardType: RationCardType.White}, 
@@ -45,12 +45,15 @@ export class AboutUsComponent  {
      { columnDef: 'phone', title: 'Phone', displayStyle: DisplayStyle.number  
   }
   ];
+
+  ELEMENT_DATA$:Observable<VotersList>=from(this.ELEMENT_DATA);
+ 
   @Input()
-  newArr: VotersList[] = [];
+  //newArr: VotersList[] = [];
   ngOnChanges() {
   
   }
   constructor() {
-         
+    
   }
 }

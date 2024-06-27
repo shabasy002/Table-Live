@@ -5,6 +5,9 @@ import { MatInputModule } from '@angular/material/input';
 import { HightlightDirective } from '../../custom-directives/hightlight.directive';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { filter } from 'rxjs/operators';
+
+
 import {MatIconModule} from '@angular/material/icon';
 import { Output, EventEmitter } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
@@ -12,7 +15,7 @@ import { ColumnConfiguration, RationCardType, SelectedSort } from '../../model/c
 import { SortOrder } from '../../model/column-configutation';
 import { SearchFieldComponent } from '../search-field/search-field.component';
 import { VotersList } from '../../model/voters-list';
-import { Observable, of } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,8 +34,11 @@ export class TempTableComponent implements AfterContentInit ,DoCheck, OnInit, On
   public columnConfigs: Array<ColumnConfiguration> = [];
   @Input({ required: true }) 
   public dataSource: Array<any> = [];
-sortedData: Array<any> = [];
-
+  @Input({required:true})
+  public dataSource$!:Observable<any>;
+  
+public sortedData: Array<any> = [];
+public SearchDataValue: Array<any>=[];
 private selectedSortOrder?:SelectedSort;
 public filterFields: Array<any> = [];
 public filterNames:Array<any>=[];
@@ -44,7 +50,7 @@ searchEvent: string='';
 
  
 constructor() {
-  
+   
   
 
 }
@@ -55,7 +61,7 @@ ngDoCheck(): void {
   }
 ngOnInit(): void {
  //this.dataSource=localStorage.getItem("tempDatasource")
-  
+ 
 }
 
 ngOnChanges(changes: SimpleChanges): void {
@@ -107,22 +113,36 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
     
   }
 
-  protected getrowtoDisplay():any[]{
+  protected getrowtoDisplay(): any{
     let value=(this.searchEvent);
+   
     if(value){
-      var rowFiltered = this.dataSource.filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true );
+      var rowFiltered: Observable<any[]> =  this.dataSource$.pipe(
+        filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true ),
+      );
+      console.log("enterd first");
+       rowFiltered.subscribe(data=>{
+      this.SearchDataValue= data;
+      console.log(this.SearchDataValue);
+      })
+      //var rowFiltered = this.dataSource$.filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true );
     }else{
-      var rowFiltered = this.dataSource.filter(x => x.hide !== true);
+      
+      var rowFiltered: Observable<any[]> =  this.dataSource$.pipe(
+        filter(x => (x.hide!== true),
+      ));
+      rowFiltered.subscribe(data=>{
+      this.SearchDataValue= data;
+      console.log(this.SearchDataValue);
+      })
+      //var rowFiltered = this.dataSource$.filter(x => x.hide !== true);
       
     }
-   
+    return this.SearchDataValue;
     
-    return rowFiltered;
-  }
-  protected getDataForKeyFromRow(row: Object): any {
    
-    return row as string;
   }
+  
  
  
   protected isCurrentSortOrder(fieldName:string, sortOrder:SortOrder):boolean{

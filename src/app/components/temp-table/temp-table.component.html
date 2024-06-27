@@ -35,7 +35,7 @@
             </thead>
             
             <tbody *ngIf="this.getrowtoDisplay().length!==0;else other_content" class="xyz">
-                <tr *ngFor="let row of this.getrowtoDisplay()">
+                <tr *ngFor="let row of this.getrowtoDisplay() ">
                   <td  *ngFor="let column of this.getColumnsToDisplay()">
                     <div  >
                      
