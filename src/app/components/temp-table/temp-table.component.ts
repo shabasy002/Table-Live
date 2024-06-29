@@ -28,9 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 export class TempTableComponent implements AfterContentInit ,DoCheck, OnInit, OnChanges {
 
-
-  
-  public columnConfigs: Array<ColumnConfiguration> = [];
+ 
+   public columnConfigs: Array<ColumnConfiguration> = [];
  
   @Input({required:true})
   public dataSource$!:Observable<any>;
