@@ -26,10 +26,10 @@
                 <td *ngFor="let column of getColumnsToDisplay()" >
                   
                   <span>{{ column.title }}</span>
-                  <!-- <div *ngIf="column.sortable">
+                  <div *ngIf="column.sortable">
                     <i class="material-icons dp48" [ngClass]="this.isCurrentSortOrder(column.columnDef, 'DESC')?'selected':''" (click)="sortData($event, column.columnDef, 'DESC')">arrow_upward</i>
                     <i class="material-icons dp48" [ngClass]="this.isCurrentSortOrder(column.columnDef, 'ASC')?'selected':''" (click)="sortData($event, column.columnDef, 'ASC')">arrow_downward</i>
-                  </div> -->
+                  </div> 
                   </td>
             </tr>
             </thead>
