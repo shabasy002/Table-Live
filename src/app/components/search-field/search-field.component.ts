@@ -30,7 +30,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
   
  constructor(){
   this.debouncer
-       .pipe(debounceTime(400))
+       .pipe(debounceTime(0))
        .subscribe((value) => this.searchEvent.emit(value));
  }
  ngOnInit() {

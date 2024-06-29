@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HightlightDirective } from '../../custom-directives/hightlight.directive';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { filter } from 'rxjs/operators';
+import { filter, toArray } from 'rxjs/operators';
 
 
 import {MatIconModule} from '@angular/material/icon';
@@ -38,20 +38,20 @@ export class TempTableComponent implements AfterContentInit ,DoCheck, OnInit, On
   public dataSource$!:Observable<any>;
   
 public sortedData: Array<any> = [];
-public SearchDataValue: Array<any>=[];
+public SearchDataValue:Array<any>=[];
 private selectedSortOrder?:SelectedSort;
 public filterFields: Array<any> = [];
 public filterNames:Array<any>=[];
 public filter = new FormControl(this.filterFields);
 //public nameFilter = new FormControl("");
-
+public taskTypes : Array<any>=[];
 public selected: string | undefined;
 searchEvent: string='';
 
  
 constructor() {
    
-  
+  //this.taskTypes = this.getrowtoDisplay();
 
 }
 
@@ -60,8 +60,13 @@ ngDoCheck(): void {
  
   }
 ngOnInit(): void {
- //this.dataSource=localStorage.getItem("tempDatasource")
- 
+  this.dataSource$.subscribe(x => {
+    if( this.SearchDataValue.includes(x)){
+      
+    }else{
+      this.SearchDataValue.push(x)
+    }
+  });
 }
 
 ngOnChanges(changes: SimpleChanges): void {
@@ -113,34 +118,18 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
     
   }
 
-  protected getrowtoDisplay(): any{
-    let value=(this.searchEvent);
-   
-    if(value){
-      var rowFiltered: Observable<any[]> =  this.dataSource$.pipe(
-        filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true ),
-      );
-      console.log("enterd first");
-       rowFiltered.subscribe(data=>{
-      this.SearchDataValue= data;
-      console.log(this.SearchDataValue);
-      })
-      //var rowFiltered = this.dataSource$.filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true );
-    }else{
-      
-      var rowFiltered: Observable<any[]> =  this.dataSource$.pipe(
-        filter(x => (x.hide!== true),
-      ));
-      rowFiltered.subscribe(data=>{
-      this.SearchDataValue= data;
-      console.log(this.SearchDataValue);
-      })
-      //var rowFiltered = this.dataSource$.filter(x => x.hide !== true);
-      
+  protected getrowtoDisplay(): any {
+    let value = (this.searchEvent);
+  //console.log( this.SearchDataValue);
+    if (value) {
+      var rowFiltered = this.SearchDataValue.filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true );
+    } else {
+      var rowFiltered = this.SearchDataValue.filter(x => x.hide !== true);
+
     }
-    return this.SearchDataValue;
-    
-   
+    return rowFiltered;
+    //console.log(this.SearchDataValue);
+
   }
   
  
@@ -150,7 +139,8 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
      
   }
   protected sortData($event: any, fieldName:string, sortOrder:SortOrder) {
-    const data = this.dataSource.slice();
+    
+    const data = this.SearchDataValue.slice();
     
     this.selectedSortOrder={columnDef:fieldName, order:sortOrder};
     if(sortOrder === 'ASC'){
@@ -161,9 +151,9 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
     }
     
     
-    this.dataSource.length=0;
+    this.SearchDataValue.length=0;
     this.sortedData.forEach((x,i)=>{
-      this.dataSource.push(x) ;   
+      this.SearchDataValue.push(x) ;   
       
     })
    

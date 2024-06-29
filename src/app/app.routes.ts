@@ -12,8 +12,8 @@ export const routes: Routes = [
 
     {
         path: 'about',
-        loadComponent:()=>import('./pages/about-us/about-us.component').then((comp=>comp.AboutUsComponent))
-        //component: AboutUsComponent
+        //loadComponent:()=>import('./pages/about-us/about-us.component').then((comp=>comp.AboutUsComponent))
+        component: AboutUsComponent
     },
     {
         path: 'rxjs',
