@@ -28,15 +28,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 export class TempTableComponent implements AfterContentInit ,DoCheck, OnInit, OnChanges {
 
-  //public toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  @Input({ required: true })
+  
   public columnConfigs: Array<ColumnConfiguration> = [];
-  @Input({ required: true }) 
-  public dataSource: Array<any> = [];
+ 
   @Input({required:true})
   public dataSource$!:Observable<any>;
-  
+  @Input({required:true})
+  public columnConfigs$!:Observable<ColumnConfiguration>;
+
 public sortedData: Array<any> = [];
 public SearchDataValue:Array<any>=[];
 private selectedSortOrder?:SelectedSort;
@@ -107,15 +107,22 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
 }
    protected getColumnsToDisplay(optionalName?: any): ColumnConfiguration[] {
     if (typeof optionalName === "undefined") {
+      
+      const filteredTemp = this.columnConfigs$.pipe(filter(x => x.hide !== true));
+      filteredTemp.subscribe(x => {
+        if( this.columnConfigs.includes(x)){
+          
+        }else{
+          this.columnConfigs.push(x)
+        }
+      });
+      
       const filtered = this.columnConfigs.filter(x => x.hide !== true);
       return filtered;
-      
     }else{
-      const rowSearch=this.dataSource.filter(x => x.name.match(optionalName));
-     
+      const rowSearch=this.SearchDataValue.filter(x => x.name.match(optionalName));
       return rowSearch;
     }
-    
   }
 
   protected getrowtoDisplay(): any {
@@ -157,8 +164,7 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
       
     })
    
-    localStorage.setItem("tempDatasource", JSON.stringify(this.dataSource));
-    localStorage.getItem("tempDatasource");
+   
     
   }
   

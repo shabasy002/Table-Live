@@ -45,7 +45,7 @@ export class AboutUsComponent  {
      { columnDef: 'phone', title: 'Phone', displayStyle: DisplayStyle.number  
   }
   ];
-
+  columnConfigurations$:Observable<ColumnConfiguration>=from(this.columnConfigurations);
   ELEMENT_DATA$:Observable<VotersList>=from(this.ELEMENT_DATA);
  
   @Input()
