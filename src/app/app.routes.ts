@@ -17,8 +17,8 @@ export const routes: Routes = [
     },
     {
         path: 'rxjs',
-        //loadComponent:()=>import('./components/rxjs-learning/rxjs-learning.component').then((comp=>comp.RxjsLearningComponent))
-        component: RxjsLearningComponent
+        loadComponent:()=>import('./components/rxjs-learning/rxjs-learning.component').then((comp=>comp.RxjsLearningComponent))
+        //component: RxjsLearningComponent
     },
     {
         path: 'debounce',

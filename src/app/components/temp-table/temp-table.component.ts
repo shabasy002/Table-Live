@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
-import {Component, Input, OnInit, input,  OnChanges, OnDestroy,SimpleChange, SimpleChanges, DoCheck, AfterContentInit} from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser  } from '@angular/common';
+import {Component, Input, OnInit, input,  OnChanges, OnDestroy,SimpleChange, SimpleChanges, DoCheck, AfterContentInit, Inject, PLATFORM_ID} from '@angular/core';
 import {Sort, MatSortModule} from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { HightlightDirective } from '../../custom-directives/hightlight.directive';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { filter, toArray } from 'rxjs/operators';
-
+import { ObsToArrayService } from '../../services/obs-to-array.service';
 
 import {MatIconModule} from '@angular/material/icon';
 import { Output, EventEmitter } from '@angular/core';
@@ -27,10 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   styleUrl: './temp-table.component.scss'
 })
 export class TempTableComponent implements AfterContentInit ,DoCheck, OnInit, OnChanges {
-
-  
-   public columnConfigs: Array<ColumnConfiguration> = [];
- 
+  public columnConfigs: Array<ColumnConfiguration> = [];
   @Input({required:true})
   public dataSource$!:Observable<any>;
   @Input({required:true})
@@ -48,31 +45,51 @@ public selected: string | undefined;
 searchEvent: string='';
 
  
-constructor() {
-   
-  //this.taskTypes = this.getrowtoDisplay();
-
+constructor( private obstoArrayservice:ObsToArrayService, @Inject(DOCUMENT) private document: Document,
+@Inject(PLATFORM_ID) private platformId: any) {
+ 
+  
 }
 
 ngDoCheck(): void {
-  
+  if (isPlatformBrowser(this.platformId)) {
+    localStorage.setItem('searchTerm', this.searchEvent);
+   
+
+  }
  
   }
 ngOnInit(): void {
-  this.dataSource$.subscribe(x => {
-    if( this.SearchDataValue.includes(x)){
+  if (isPlatformBrowser(this.platformId)) {
+     let searchTerm=(localStorage.getItem('searchTerm'));
+     if(searchTerm){
+      this.getDatafrom(searchTerm);
       
-    }else{
-      this.SearchDataValue.push(x)
-    }
+     }
+  }
+
+  this.obstoArrayservice.convertObservableToArray(this.columnConfigs$).subscribe(data=> {
+    this.columnConfigs = data;
+    
   });
-  this.columnConfigs$.subscribe(x => {
-    if( this.columnConfigs.includes(x)){
+  this.obstoArrayservice.convertObservableToArray(this.dataSource$).subscribe(data=> {
+    this.SearchDataValue = data;
+   
+  });
+  
+  //   if( this.SearchDataValue.includes(x)){
       
-    }else{
-      this.columnConfigs.push(x)
-    }
-  });
+  //   }else{
+  //     this.SearchDataValue.push(x)
+  //   }
+  // });
+  // this.columnConfigs$.subscribe(x => {
+  //   if( this.columnConfigs.includes(x)){
+      
+  //   }else{
+  //     this.columnConfigs.push(x)
+  //   }
+  // });
 }
 
 ngOnChanges(changes: SimpleChanges): void {
@@ -85,7 +102,7 @@ ngAfterContentInit(): void {
 }
 protected getDatafrom(e:string){
   this.searchEvent=e;
- 
+  
 }
 protected inputChange(event:any){
   
@@ -131,9 +148,10 @@ protected getColumnsToDisplayForSelect(): ColumnConfiguration[] {
     }
   }
 
-  protected getrowtoDisplay(): any {
+  protected getrowtoDisplay(v?:any): any {
+
     let value = (this.searchEvent);
-  //console.log( this.SearchDataValue);
+  
     if (value) {
       var rowFiltered = this.SearchDataValue.filter(x => (x.name.toLowerCase()).match(value.toLowerCase()) && x.hide !==true );
     } else {

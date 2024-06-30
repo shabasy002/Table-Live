@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Observable, from, fromEvent, of } from 'rxjs';
+import { Observable, from, fromEvent, interval, map, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import e from 'express';
 
 @Component({
   selector: 'app-rxjs-learning',
@@ -24,10 +25,13 @@ export class RxjsLearningComponent implements OnInit, AfterViewInit{
     name:"Anu",
     grade:"B"
   }
+  orders=["mango", "banana", "apple"];
+  orders$:Observable<any>=from(this.orders);
   student$:Observable<any>=of(this.studentObj);
   
   @ViewChild('validate') validate?:ElementRef;
   @ViewChild('getLink') getLink?:ElementRef;
+  subscription: any;
 
   constructor(){
 
@@ -57,21 +61,38 @@ export class RxjsLearningComponent implements OnInit, AfterViewInit{
    this.students$.subscribe(data=>{
     //console.log(data);
    })
+
+   this.orders$.subscribe(data=>{
+    const seq$=interval(500);
+    this.subscription = seq$.subscribe(num=>{
+      if(num<5){
+        console.log(data+num);
+      }
+      
+    })
+    this.subscription.unsubscribe();
+    console.log(data);
+   })
  }
  ngAfterViewInit(): void {
 
 }
+ngOnDestroy() {
+  
+}
  rxjsEventObservable() {
   const btnObservable$=fromEvent(this.validate?.nativeElement, 'click');
   btnObservable$.subscribe(data=>{
-     console.log(data);
+     //console.log(data);
    })
   }
   getEventObservable() {
     const linkObservable$=fromEvent(this.getLink?.nativeElement, 'mouseover')
     linkObservable$.subscribe(data=>{
-      console.log(data);
+     
+      //console.log(data);
     })
+ 
   }
 }
 
