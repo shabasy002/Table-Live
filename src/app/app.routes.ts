@@ -7,6 +7,7 @@ import { AdminModule } from './admin/admin.module';
 import { RxjsLearningComponent } from './components/rxjs-learning/rxjs-learning.component';
 import { AngularDebounceComponent } from './components/angular-debounce/angular-debounce.component';
 import { TabbedStructureComponent } from './components/tabbed-structure/tabbed-structure.component';
+import { SelectToTextComponent } from './components/select-to-text/select-to-text.component';
 
 export const routes: Routes = [
 
@@ -14,6 +15,11 @@ export const routes: Routes = [
         path: 'about',
         //loadComponent:()=>import('./pages/about-us/about-us.component').then((comp=>comp.AboutUsComponent))
         component: AboutUsComponent
+    },
+    {
+        path: 'select',
+        //loadComponent:()=>import('./pages/about-us/about-us.component').then((comp=>comp.AboutUsComponent))
+        component: SelectToTextComponent
     },
     {
         path: 'rxjs',

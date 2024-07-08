@@ -1,0 +1,12 @@
+<div class="form-container">
+<div [formGroup]="form" class="form-group">
+    <label for="selectBox">Choose an option:</label>
+    <select id="selectBox" formControlName="selectedValue">
+      <option *ngFor="let option of options" [value]="option" selected>{{ option }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="textField">Selected value:</label>
+    <input id="textField" type="text" [value]="form.get('selectedValue')?.value" readonly>
+  </div>
+</div>

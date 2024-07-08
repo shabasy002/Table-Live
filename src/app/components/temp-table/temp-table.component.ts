@@ -7,6 +7,7 @@ import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { filter, toArray } from 'rxjs/operators';
 import { ObsToArrayService } from '../../services/obs-to-array.service';
+import { TableModule } from 'primeng/table'; 
 
 import {MatIconModule} from '@angular/material/icon';
 import { Output, EventEmitter } from '@angular/core';
@@ -22,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @Component({
   selector: 'app-temp-table',
   standalone: true,
-  imports: [MatTableModule, SearchFieldComponent, HightlightDirective, ReactiveFormsModule ,MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
+  imports: [MatTableModule, TableModule, SearchFieldComponent, HightlightDirective, ReactiveFormsModule ,MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, FormsModule, MatCheckboxModule, MatIconModule, MatSortModule],
   templateUrl: './temp-table.component.html',
   styleUrl: './temp-table.component.scss'
 })

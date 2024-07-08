@@ -1,7 +1,10 @@
 <div class="table-component">
   <div appHightlight>Election table</div>
-
+    <ul>
+      <li *ngFor="let c of columnConfigs$ | keyvalue">{{c}}</li>
+    </ul>
     <table>
+      
         <thead>
           <tr>
             <td>
@@ -22,6 +25,7 @@
           <tr>
             
           </tr>
+
             <tr>
                 <td *ngFor="let column of getColumnsToDisplay()" >
                   
@@ -32,7 +36,7 @@
                   </div> 
                   </td>
             </tr>
-            </thead>
+        </thead>
             
             <tbody *ngIf="getrowtoDisplay().length;else other_content" class="xyz">
                 <tr *ngFor="let row of getrowtoDisplay() ">
