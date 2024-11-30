@@ -1,0 +1,12 @@
+{
+  "routes": [
+    "/",
+    "/about",
+    "/admin",
+    "/admin/add-user",
+    "/debounce",
+    "/rxjs",
+    "/select",
+    "/tabs"
+  ]
+}
